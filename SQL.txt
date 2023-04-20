@@ -1,0 +1,41 @@
+"""Создание таблицы"""
+CREATE TABLE Auto
+(
+	AutoID INTEGER PRIMARY KEY,
+	CarBrand varchar(255) NOT NULL,
+	Model varchar(255) NOT NULL,
+	YearOfRelease INTEGER NOT NULL,
+	Price INTEGER NOT NULL
+	);
+
+"""Заполнение таблицы"""
+INSERT INTO Auto
+	(CarBrand, Model, YearOfRelease, Price)
+VALUES
+	('Mercedes-Benz', 'GLA-250', '2015', '1750000'),
+	('Toyota', 'Camry', '2020', '2500000'),
+	('KIA', 'Optima', '2019', '1900000'),
+	('BMW', 'X6', '2011', '1500000'),
+	('Toyota', 'RAV4', '2021', '3400000'),
+	('Lada', 'Vesta', '2016', '675000'),
+	('Lada', 'XRAY', '2018', '800000'),
+	('Lexus', 'rx300', '2003', '820000'),
+	('Infinity', 'Q50', '2018', '2530000'),
+	('Daewoo', 'Matiz', '2013', '250000');
+
+"""Запрос по выдаче последних 3 авто"""
+SELECT *
+From auto
+ORDER by AutoID DESC 
+LIMIT 3;
+
+"""Запрос по выдаче самого старого авто"""
+SELECT *
+FROM Auto
+ORDER by YearOfRelease ASC
+LIMIT 1;
+
+"""Запрос по выдаче авто только марки Toyota""
+SELECT *
+FROM Auto
+WHERE CarBrand = 'Toyota';
