@@ -39,3 +39,34 @@ LIMIT 1;
 SELECT *
 FROM Auto
 WHERE CarBrand = 'Toyota';
+
+
+"""Написать запрос, выводящий имя и номер каждого продавца, имеющего клиентов в Лондоне (London), Москве (Moscow) или Сочи (Sochi). 
+Продавцы должны быть отсортированы по возрастанию номера и не должны повторяться (SNUM должен быть уникальным).""
+SELECT DISTINCT s.sname, s.snum 
+FROM SALES s 
+JOIN CLIENTS c ON s.snum = c.snum
+WHERE c.city IN ('London', 'Moscow', 'Sochi') 
+ORDER BY s.snum ASC
+
+
+"""Написать запрос, выводящий подзапросом (без джойна) номера и имена всех продавцов, имеющих в своем городе заказчиков, которых они не обслуживают. 
+Сортировка по возрастанию SNUM, дубликаты должны быть исключены."""
+Select snum, sname
+from SALES
+where exists (
+select *
+    from CLIENTS
+    where (SALES.city = CLIENTS.city) and (SALES.snum != CLIENTS.snum)
+)
+order by SNUM;
+
+
+"""Написать запрос, выводящий [join’ом] номера и имена всех продавцов, имеющих в своем городе заказчиков, которых они не обслуживают. 
+Сортировка по возрастанию SNUM, дубликаты должны быть исключены."""
+SELECT DISTINCT SALES.snum,sname
+FROM SALES 
+JOIN CLIENTS ON SALES.CITY = CLIENTS.CITY
+Where SALES.snum != CLIENTS.SNUM
+Order by SALES.snum
+
